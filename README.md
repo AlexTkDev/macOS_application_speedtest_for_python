@@ -1,8 +1,8 @@
-## Documentation for check_internrt_speed_application_MacOS
+## Documentation for macOS_application_speedtest_for_python
 
 ### Project Description
 
-`check_internrt_speed_application_MacOS` is an application designed to check internet 
+`macOS_application_speedtest_for_python` is an application designed to check internet 
 speed on macOS. It allows users to quickly and conveniently measure download and upload 
 speeds, as well as latency (ping).
 
@@ -18,13 +18,10 @@ To install the dependencies, execute the following commands:
 
 ```bash
 # Clone repository
-# Change directory to the project
-cd check_internrt_speed_application_MacOS
-
+git clone https://github.com/AlexTkDev/macOS_application_speedtest_for_python.git
 # Create a virtual environment (recommended)
 python -m venv .venv
 source .venv/bin/activate
-
 # Install dependencies
 pip install -r requirements.txt
 ```
@@ -51,11 +48,33 @@ pyinstaller main.spec
 After building, the application will be located in the `dist` directory, and you can launch it by double-clicking the icon.
 
 ### Configuration
-The project include a `Alexs_SpeedTest.py` file, where you can find settings such as 
+The project include a `alexs_dpeedtest.py` file, where you can find settings such as 
 parameters for speed testing. Feel free to modify these parameters according to your needs.
 
 ### License
 This project is licensed under the MIT License. Please refer to the `LICENSE` file for more detailed information.
+
+### Code Analysis with Pylint
+This project uses **Pylint** for static code analysis to ensure that code adheres to Python's 
+best practices and follows PEP 8 style guidelines. Pylint checks for errors, potential issues,
+and enforces consistent coding style, making it a valuable tool for maintaining code quality.
+
+### How to Install Pylint
+To install Pylint, use the following command in your terminal:
+```bash
+pip install pylint
+```
+### Running Pylint
+Once installed, you can run Pylint on a specific Python file with:
+```bash
+pylint your_file.py
+```
+Or, to analyze all Python files in the project, run:
+```bash
+ pylint *.py
+```
+This setup is also configured to run automatically within GitHub Actions on every code push, 
+checking the code with multiple Python versions for compatibility.
 
 ### Contribution
 If you would like to contribute to the project, please create a fork of the repository and submit a Pull Request with your changes.
@@ -65,10 +84,10 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 
 ***
 
-## Документация к проекту check_internrt_speed_application_MacOS
+## Документация к проекту macOS_application_speedtest_for_python
 
 ### Описание проекта
-`check_internrt_speed_application_MacOS` — это приложение для проверки скорости 
+`macOS_application_speedtest_for_python` — это приложение для проверки скорости 
 интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять 
 скорость загрузки и выгрузки, а также задержку (ping).
 
@@ -83,13 +102,11 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 Для установки зависимостей выполните следующие команды:
 
 ```bash
-# Переход в каталог проекта
-cd check_internrt_speed_application_MacOS
-
+# Клонируйте репозиторий
+git clone https://github.com/AlexTkDev/macOS_application_speedtest_for_python.git
 # Создание виртуального окружения (рекомендуется)
 python -m venv .venv
 source .venv/bin/activate
-
 # Установка зависимостей
 pip install -r requirements.txt
 ```
@@ -115,12 +132,35 @@ pyinstaller main.spec
 После сборки приложение будет находиться в директории `dist`, и его можно будет запустить двойным щелчком мыши.
 
 ### Конфигурация
-В проекте файл `Alexs_SpeedTest.py`, в котором находятся настройки, такие как параметры для 
+В проекте файл `alexs_apeedtest.py`, в котором находятся настройки, такие как параметры для 
 тестирования скорости. Вы можете изменять эти параметры в соответствии с вашими потребностями.
 ### Лицензия
 Этот проект лицензирован под MIT License. Пожалуйста, ознакомьтесь с файлом `LICENSE` для получения более подробной информации.
 
-### Контрибьюция
+### Анализ кода с помощью Pylint
+В данном проекте используется **Pylint** для статического анализа кода, чтобы обеспечить 
+соблюдение лучших практик Python и следование рекомендациям PEP 8. Pylint проверяет наличие 
+ошибок, потенциальные проблемы и обеспечивает единообразный стиль кода, что делает его ценным 
+инструментом для поддержания качества кода.
+
+### Как установить Pylint
+Для установки Pylint используйте следующую команду в терминале:
+```bash
+pip install pylint
+```
+### Запуск Pylint
+После установки вы можете запустить Pylint для конкретного Python файла с помощью:
+```bash
+pylint ваш_файл.py
+```
+Или, чтобы проанализировать все Python файлы в проекте, выполните:
+```bash
+pylint *.py
+```
+Эта настройка также сконфигурирована для автоматического запуска в GitHub Actions при каждом 
+пуше кода, проверяя код на совместимость с несколькими версиями Python.
+
+### Контрибуция
 Если вы хотите внести свой вклад в проект, пожалуйста, создайте форк репозитория и отправьте Pull Request с вашими изменениями.
 
 ### Связь
