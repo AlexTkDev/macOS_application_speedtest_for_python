@@ -5,6 +5,8 @@
 `macOS_application_speedtest_for_python` is an application designed to check internet 
 speed on macOS. It allows users to quickly and conveniently measure download and upload 
 speeds, as well as latency (ping).
+Developed based on another project of mine, which you can see at the link on GitHub:
+[Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
 ### Installation
 
@@ -90,6 +92,8 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 `macOS_application_speedtest_for_python` — это приложение для проверки скорости 
 интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять 
 скорость загрузки и выгрузки, а также задержку (ping).
+Разработанное на основе другого моего проекта, который вы можете посмотреть по ссылке на GitHub:
+[Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
 ### Установка
 
