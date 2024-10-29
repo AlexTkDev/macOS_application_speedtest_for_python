@@ -1,8 +1,8 @@
+import threading
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 import speedtest as st
-import threading
 
 
 def update_progress(value, message):
