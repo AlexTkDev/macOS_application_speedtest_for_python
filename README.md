@@ -50,7 +50,7 @@ pyinstaller main.spec
 After building, the application will be located in the `dist` directory, and you can launch it by double-clicking the icon.
 
 ### Configuration
-The project include a `alexs_dpeedtest.py` file, where you can find settings such as 
+The project include a `alexs_speedtest.py` file, where you can find settings such as 
 parameters for speed testing. Feel free to modify these parameters according to your needs.
 
 ### License
@@ -136,7 +136,7 @@ pyinstaller main.spec
 После сборки приложение будет находиться в директории `dist`, и его можно будет запустить двойным щелчком мыши.
 
 ### Конфигурация
-В проекте файл `alexs_apeedtest.py`, в котором находятся настройки, такие как параметры для 
+В проекте файл `alexs_speedtest.py`, в котором находятся настройки, такие как параметры для 
 тестирования скорости. Вы можете изменять эти параметры в соответствии с вашими потребностями.
 ### Лицензия
 Этот проект лицензирован под MIT License. Пожалуйста, ознакомьтесь с файлом `LICENSE` для получения более подробной информации.
