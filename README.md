@@ -2,10 +2,9 @@
 
 ### Project Description
 
-`macOS_application_speedtest_for_python` is an application designed to check internet 
-speed on macOS. It allows users to quickly and conveniently measure download and upload 
-speeds, as well as latency (ping).
-Developed based on another project of mine, which you can see at the link on GitHub:
+`macOS_application_speedtest_for_python` is an application for testing internet connection speed on macOS. It allows users to quickly and easily measure download and upload speeds, as well as latency (ping).
+The project also provides system information, including the computer name, network adapters, their IP addresses, and MAC addresses, displayed directly in the program window.
+The project is built based on another one of my applications, which you can check out on GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
 ### Installation
@@ -89,10 +88,9 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 ## Документация к проекту macOS_application_speedtest_for_python
 
 ### Описание проекта
-`macOS_application_speedtest_for_python` — это приложение для проверки скорости 
-интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять 
-скорость загрузки и выгрузки, а также задержку (ping).
-Разработанное на основе другого моего проекта, который вы можете посмотреть по ссылке на GitHub:
+`macOS_application_speedtest_for_python` — это приложение для проверки скорости интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять скорость загрузки и выгрузки, а также задержку (ping).
+В проекте также представлена информация о системе, включая название компьютера, сетевые адаптеры, их IP-адреса и MAC-адреса, отображаемая прямо в окне программы.
+Проект разработан на основе другого моего приложения, которое вы можете посмотреть по ссылке на GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
 ### Установка
