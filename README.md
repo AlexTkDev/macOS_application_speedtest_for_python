@@ -38,6 +38,9 @@ The application features a simple and intuitive interface where you can view:
 - **Download Speed**
 - **Upload Speed**
 - **Ping**
+- **Adapter**
+- **IP Address**
+- **MAC Address**
 
 When the application is launched, it will automatically begin testing internet speed.
 
@@ -124,6 +127,9 @@ python main.py
 - **Скорость загрузки** (Download Speed)
 - **Скорость выгрузки** (Upload Speed)
 - **Задержка** (Ping)
+- **Адаптер** (Adapter)
+- **IP Адрес** (IP Address)
+- **MAC Адрес** (MAC Address)
 
 При запуске приложения оно автоматически начнет тестирование скорости интернета.
 #### Сборка приложения
