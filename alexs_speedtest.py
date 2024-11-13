@@ -3,13 +3,14 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 import speedtest as st
+import network_adapter_information
 
 
 def update_progress(value, message):
-    """Updates the progress bar and message label."""
+    """Updates the progress bar and message."""
     progress_bar['value'] = value
     progress_label.config(text=f"{message} (Progress: {value}%)")
-    root.update_idletasks()  # Update the GUI
+    root.update_idletasks()  # Update the interface
 
 
 def perform_speedtest():
@@ -17,11 +18,11 @@ def perform_speedtest():
     test = st.Speedtest()
     result_container = {}
 
-    # Start download speed test
+    # Download speed test
     update_progress(0, "Starting download speed test...")
     download_thread = threading.Thread(target=test_download_speed, args=(test, result_container))
     download_thread.start()
-    download_thread.join()  # Wait for the download thread to finish
+    download_thread.join()  # Wait for the download test to finish
 
     if 'error' in result_container:
         messagebox.showerror("Error", result_container['error'])
@@ -29,11 +30,11 @@ def perform_speedtest():
 
     download_speed = result_container['download']
 
-    # Prepare for upload speed test
+    # Upload speed test
     update_progress(0, "Starting upload speed test...")
     upload_thread = threading.Thread(target=test_upload_speed, args=(test, result_container))
     upload_thread.start()
-    upload_thread.join()  # Wait for the upload thread to finish
+    upload_thread.join()  # Wait for the upload test to finish
 
     if 'error' in result_container:
         messagebox.showerror("Error", result_container['error'])
@@ -46,7 +47,7 @@ def perform_speedtest():
 
 
 def test_download_speed(test, result_container):
-    """Tests download speed and stores the result in the result_container."""
+    """Tests download speed."""
     try:
         download_speed = test.download(callback=download_progress_callback)
         if download_speed is None:
@@ -57,7 +58,7 @@ def test_download_speed(test, result_container):
 
 
 def test_upload_speed(test, result_container):
-    """Tests upload speed and stores the result in the result_container."""
+    """Tests upload speed."""
     try:
         upload_speed = test.upload(callback=upload_progress_callback)
         if upload_speed is None:
@@ -68,28 +69,28 @@ def test_upload_speed(test, result_container):
 
 
 def download_progress_callback(current, total, **kwargs):
-    """Callback to update progress during download speed test."""
+    """Updates progress during the download speed test."""
     if total > 0:  # Avoid division by zero
         percentage = int((current / total) * 100)
         update_progress(percentage, "Testing download speed...")
 
 
 def upload_progress_callback(current, total, **kwargs):
-    """Callback to update progress during upload speed test."""
+    """Updates progress during the upload speed test."""
     if total > 0:  # Avoid division by zero
         percentage = int((current / total) * 100)
         update_progress(percentage, "Testing upload speed...")
 
 
 def display_results(down_speed, up_speed, ping):
-    """Displays the speed test results in the UI."""
+    """Displays the results of the speed test in the interface."""
     result_text = (
         f"Download speed: {down_speed} Mbps\n"
         f"Upload speed: {up_speed} Mbps\n"
         f"Ping: {ping} ms"
     )
     result_label.config(text=result_text)
-    update_progress(100, "Test complete!")  # Set progress bar to 100%
+    update_progress(100, "Test complete!")  # Set progress to 100%
 
     # Show "Repeat Speed Test" button and hide the exit button
     repeat_button.pack(pady=10)
@@ -101,43 +102,69 @@ def start_speedtest():
     start_button.pack_forget()  # Hide the start button
     repeat_button.pack_forget()  # Hide the repeat button if it was visible
 
-    # Run the speed test in a separate thread
+    # Show progress bar
+    progress_label.pack(pady=10)
+    progress_bar.pack(pady=20)
+
+    # Start the speed test in a separate thread
     threading.Thread(target=perform_speedtest).start()
+
+    # Get and display system information
+    display_system_info()
+
+
+def display_system_info():
+    """Displays system information in the interface."""
+    info = network_adapter_information.get_network_info()
+
+    info_text = f"Computer Name: {info['Computer Name']}"
+    info_text += "\nAdapters:\n"
+
+    for adapter in info['Adapters']:
+        info_text += f"- Adapter: {adapter['Adapter']}\n"
+        info_text += f"- IP Address: {adapter['IP Address']}\n"
+        info_text += f"- MAC Address: {adapter['MAC Address']}\n"
+
+    system_info_label.config(text=info_text)
 
 
 def exit_program():
-    """Exits the application."""
+    """Closes the program."""
     root.quit()
 
 
-# Create the main window
+# Create main window
 root = tk.Tk()
 root.title("Internet Speed Test")
-root.geometry("400x400")
+root.geometry("400x450")
 
-# Create the start button
+# Button to start speed test
 start_button = tk.Button(root, text="Start Speed Test", command=start_speedtest)
 start_button.pack(pady=20)
 
-# Create a repeat button that will be shown after the first test
+# Button to repeat speed test
 repeat_button = tk.Button(root, text="Repeat Speed Test", command=start_speedtest)
-repeat_button.pack_forget()  # Initially hide the repeat button
+repeat_button.pack_forget()  # Initially hidden
 
-# Create a label to display results
+# Label to display results
 result_label = tk.Label(root, text="")
 result_label.pack(pady=20)
 
-# Create a label to show progress
+# Label to display progress
 progress_label = tk.Label(root, text="")
-progress_label.pack(pady=10)
+# Initially, progress is not visible
 
-# Create a progress bar
+# Progress bar
 progress_bar = ttk.Progressbar(root, length=300, mode='determinate')
-progress_bar.pack(pady=20)
+# Initially, progress is not visible
 
-# Create a button to exit the program
+# Label to display system information
+system_info_label = tk.Label(root, text="", justify="left", anchor="w")
+system_info_label.pack(pady=10, padx=20)
+
+# Exit button
 exit_button = tk.Button(root, text="Exit", command=exit_program)
-exit_button.pack(pady=10)
+exit_button.pack(side="bottom", pady=10)
 
 # Run the application
 root.mainloop()
