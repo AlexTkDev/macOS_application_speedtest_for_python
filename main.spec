@@ -41,5 +41,6 @@ app = BUNDLE(
     exe,
     name='Alexs_SpeedTest.app',
     icon='speedtest.icns',
-    bundle_identifier=None,
+    bundle_identifier='org.AlexTkDev.speedtest',
+    version='1.1.1',
 )
