@@ -2,9 +2,9 @@
 
 ### Project Description
 
-`macOS_application_speedtest_for_python` is an application for testing internet connection 
-speed on macOS. It allows users to quickly and easily measure download and upload speeds, latency (ping), as well as the history of speed measurements.
-The project also provides system information, including the computer name, network adapters, their IP addresses, and MAC addresses, displayed directly in the program window.
+`macOS_application_speedtest_for_python` is a macOS application designed to test your internet connection 
+speed using Python. The program provides a convenient interface for measuring download, upload, and ping speeds, 
+and also supports retesting and viewing test history.
 The project is built based on another one of my applications, which you can check out on GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
@@ -31,21 +31,28 @@ pip install -r requirements.txt
 ### Usage
 After installation, you can run the application by executing:
 ```bash
-python main.py
+python alexs_speedtest.py
 ```
 
-#### Application Interface
-The application features a simple and intuitive interface where you can view:
-- **Download Speed**
-- **Upload Speed**
-- **Ping**
-- **Adapter**
-- **IP Address**
-- **MAC Address**
-- **View Test History table**
-- **Show graph Test History**
+#### Features
+- **Internet Speed Measurement**: The app allows you to test download and upload speeds, as well as ping (latency) of your internet connection.
+- **Graphical Display**: After completing a test, users can view the test results and optionally plot the test history.
+- **Repeat Test**: After a test is completed, users can repeat the test without needing to restart the application.
+- **Test History**: The app saves the results of previous tests, allowing users to view the test history and visualize changes in speed.
 
-When the application is launched, it will automatically begin testing internet speed.
+#### Key Components
+- **Tkinter**: Used for creating the graphical user interface (GUI), which includes buttons for starting tests, viewing results, and plotting graphs.
+- **Speedtest-cli**: A library for performing internet speed tests, which powers the app's functionality.
+- **Matplotlib**: A library for visualizing the test history by plotting graphs.
+- **JSON**: A library for reading and writing test results stored in JSON format.
+
+#### How It Works
+1. When the app is launched, users can click the **"Start Speed Test"** button to initiate the test.
+2. The app runs a speed test using the **speedtest-cli** library, measuring download speed, upload speed, and ping.
+3. Once the test is completed, the results are displayed in the app's interface.
+4. Users can save the test results to the **history.json** file and visualize the data using **matplotlib**.
+5. For a repeat test, users can simply click the **"Repeat Speed Test"** button, which hides the history buttons until the new test is finished.
+
 
 #### Building the Application
 To build the application in `.app` format, run the following command:
@@ -94,10 +101,9 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 ## Документация к проекту macOS_application_speedtest_for_python
 
 ### Описание проекта
-`macOS_application_speedtest_for_python` — это приложение для проверки скорости 
-интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять скорость 
-загрузки и выгрузки, задержку (ping), а также истории замеров скорости.
-В проекте также представлена информация о системе, включая название компьютера, сетевые адаптеры, их IP-адреса и MAC-адреса, отображаемая прямо в окне программы.
+`macOS_application_speedtest_for_python` — это приложение для macOS, предназначенное для проверки 
+скорости интернет-соединения с использованием Python. Программа предоставляет удобный интерфейс для измерения 
+скорости загрузки, выгрузки и пинга, а также поддерживает повторные тесты и просмотр истории тестов.
 Проект разработан на основе другого моего приложения, которое вы можете посмотреть по ссылке на GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
@@ -124,19 +130,33 @@ pip install -r requirements.txt
 ### Использование
 После установки вы можете запустить приложение, выполнив команду:
 ```bash
-python main.py
+python alexs_speedtest.py
 ```
 
-#### Интерфейс приложения
-Приложение имеет простой и интуитивно понятный интерфейс, где вы можете увидеть:
-- **Скорость загрузки** (Download Speed)
-- **Скорость выгрузки** (Upload Speed)
-- **Задержка** (Ping)
-- **Адаптер** (Adapter)
-- **IP Адрес** (IP Address)
-- **MAC Адрес** (MAC Address)
-- **Показать таблицу истории** (View Test History table)
-- **Показать график измерений** (Show graph Test History)
+#### Возможности
+- **Измерение скорости интернета**: Приложение позволяет проверить скорость загрузки и выгрузки данных, а также пинг вашего интернет-соединения.
+- **Графическое отображение**: После завершения теста пользователи могут увидеть результаты теста в наглядной форме, а также построить график истории тестов.
+- **Повторный тест**: После завершения теста пользователи могут повторно запустить тест без необходимости перезапуска приложения.
+- **История тестов**: Приложение сохраняет результаты предыдущих тестов, предоставляя возможность просматривать историю тестов и визуализировать изменения скорости интернета.
+
+#### Основные компоненты
+- **Tkinter**: Используется для создания графического интерфейса пользователя (GUI), где отображаются кнопки для запуска теста, результатов и графиков.
+- **Speedtest-cli**: Библиотека для проведения тестов скорости интернет-соединения, на основе которой работает приложение.
+- **Matplotlib**: Используется для построения графиков истории тестов.
+
+#### Используемые библиотеки
+- **Tkinter**: Стандартная библиотека Python для создания графических интерфейсов.
+- **speedtest-cli**: Библиотека для проведения тестов скорости интернета.
+- **matplotlib**: Библиотека для визуализации данных, используется для построения графиков.
+- **json**: Библиотека для работы с форматами данных JSON, используется для сохранения и загрузки истории тестов.
+
+#### Как это работает
+1. При запуске приложения пользователь может нажать кнопку **"Start Speed Test"**, чтобы начать тестирование скорости интернет-соединения.
+2. Приложение запускает тест с использованием библиотеки **speedtest-cli**, который измеряет скорость загрузки, выгрузки и пинг.
+3. После завершения теста результаты отображаются в окне приложения.
+4. Пользователь может сохранить результаты тестов в файл **history.json**, а также построить график с помощью библиотеки **matplotlib**.
+5. Для повторного теста достаточно нажать на кнопку **"Repeat Speed Test"**, и тест будет выполнен снова, скрыв кнопки истории до окончания нового теста.
+
 
 При запуске приложения оно автоматически начнет тестирование скорости интернета.
 #### Сборка приложения
