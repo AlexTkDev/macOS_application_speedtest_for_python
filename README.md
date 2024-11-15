@@ -2,9 +2,7 @@
 
 ### Project Description
 
-`macOS_application_speedtest_for_python` is an application for testing internet connection 
-speed on macOS. It allows users to quickly and easily measure download and upload speeds, latency (ping), as well as the history of speed measurements.
-The project also provides system information, including the computer name, network adapters, their IP addresses, and MAC addresses, displayed directly in the program window.
+`macOS_application_speedtest_for_python` — an application for testing the speed of an Internet connection on macOS. Allows users to quickly and easily measure the download and upload speed, latency (ping), and also has a history of speed measurements and the ability to view a graph of the measurement history in the program window. The project also provides system information, including the computer name, network adapters, their IP addresses and MAC addresses, displayed directly in the program window.
 The project is built based on another one of my applications, which you can check out on GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
@@ -94,10 +92,7 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 ## Документация к проекту macOS_application_speedtest_for_python
 
 ### Описание проекта
-`macOS_application_speedtest_for_python` — это приложение для проверки скорости 
-интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять скорость 
-загрузки и выгрузки, задержку (ping), а также истории замеров скорости.
-В проекте также представлена информация о системе, включая название компьютера, сетевые адаптеры, их IP-адреса и MAC-адреса, отображаемая прямо в окне программы.
+`macOS_application_speedtest_for_python` — приложение для тестирования скорости интернет-соединения на macOS. Позволяет пользователям быстро и легко измерять скорость загрузки и выгрузки, задержку (ping), а также имеет историю измерений скорости и возможность просмотра графика истории измерений в окне программы. Проект также предоставляет системную информацию, включая имя компьютера, сетевые адаптеры, их IP-адреса и MAC-адреса, отображаемую непосредственно в окне программы.
 Проект разработан на основе другого моего приложения, которое вы можете посмотреть по ссылке на GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
