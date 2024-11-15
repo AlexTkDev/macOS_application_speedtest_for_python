@@ -2,7 +2,8 @@
 
 ### Project Description
 
-`macOS_application_speedtest_for_python` is an application for testing internet connection speed on macOS. It allows users to quickly and easily measure download and upload speeds, as well as latency (ping).
+`macOS_application_speedtest_for_python` is an application for testing internet connection 
+speed on macOS. It allows users to quickly and easily measure download and upload speeds, latency (ping), as well as the history of speed measurements.
 The project also provides system information, including the computer name, network adapters, their IP addresses, and MAC addresses, displayed directly in the program window.
 The project is built based on another one of my applications, which you can check out on GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
@@ -41,6 +42,8 @@ The application features a simple and intuitive interface where you can view:
 - **Adapter**
 - **IP Address**
 - **MAC Address**
+- **View Test History table**
+- **Show graph Test History**
 
 When the application is launched, it will automatically begin testing internet speed.
 
@@ -91,7 +94,9 @@ For questions or suggestions, you can reach out to me via [GitHub](https://githu
 ## Документация к проекту macOS_application_speedtest_for_python
 
 ### Описание проекта
-`macOS_application_speedtest_for_python` — это приложение для проверки скорости интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять скорость загрузки и выгрузки, а также задержку (ping).
+`macOS_application_speedtest_for_python` — это приложение для проверки скорости 
+интернет-соединения на macOS. Оно позволяет пользователям быстро и удобно измерять скорость 
+загрузки и выгрузки, задержку (ping), а также истории замеров скорости.
 В проекте также представлена информация о системе, включая название компьютера, сетевые адаптеры, их IP-адреса и MAC-адреса, отображаемая прямо в окне программы.
 Проект разработан на основе другого моего приложения, которое вы можете посмотреть по ссылке на GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
@@ -130,6 +135,8 @@ python main.py
 - **Адаптер** (Adapter)
 - **IP Адрес** (IP Address)
 - **MAC Адрес** (MAC Address)
+- **Показать таблицу истории** (View Test History table)
+- **Показать график измерений** (Show graph Test History)
 
 При запуске приложения оно автоматически начнет тестирование скорости интернета.
 #### Сборка приложения
