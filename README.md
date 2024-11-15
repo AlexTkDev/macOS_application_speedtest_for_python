@@ -1,7 +1,6 @@
 ## Documentation for macOS_application_speedtest_for_python
 
 ### Project Description
-
 `macOS_application_speedtest_for_python` is a macOS application designed to test your internet connection 
 speed using Python. The program provides a convenient interface for measuring download, upload, and ping speeds, 
 and also supports retesting and viewing test history.
