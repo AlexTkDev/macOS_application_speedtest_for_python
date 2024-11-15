@@ -1,5 +1,5 @@
-import json
 import os
+import json
 from tkinter import Toplevel, Text, Scrollbar, messagebox
 from matplotlib import pyplot as plt
 
@@ -18,7 +18,7 @@ def save_test_results(download_speed, upload_speed, ping, file_path="test_histor
 
     # If the file exists, load the current data
     if os.path.exists(file_path):
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             history = json.load(file)
     else:
         history = []
@@ -27,7 +27,7 @@ def save_test_results(download_speed, upload_speed, ping, file_path="test_histor
     history.append(data)
 
     # Save the updated file
-    with open(file_path, "w") as file:
+    with open(file_path, "w", encoding="utf-8") as file:
         json.dump(history, file, indent=4)
 
 
@@ -37,7 +37,7 @@ def view_history(root, history_path):
         messagebox.showinfo("History", "No history available.")
         return
 
-    with open(history_path, "r") as file:
+    with open(history_path, "r", encoding="utf-8") as file:
         history = json.load(file)
 
     # Create a new window to display the history
@@ -71,7 +71,7 @@ def plot_history(root, history_path):
         messagebox.showinfo("History", "No history available.")
         return
 
-    with open(history_path, "r") as file:
+    with open(history_path, "r", encoding="utf-8") as file:
         history = json.load(file)
 
     # Get data for the plot

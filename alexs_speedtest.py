@@ -1,10 +1,10 @@
+import os
 import threading
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 import speedtest as st
 import network_adapter_information
-import os
 from test_history import save_test_results, view_history, plot_history
 
 
