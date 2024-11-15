@@ -5,8 +5,9 @@ a = Analysis(
     ['alexs_speedtest.py'],
     pathex=[],
     binaries=[],
-    datas=[],
-    hiddenimports=[],
+    datas=[('test_history.json', '.')],
+    hiddenimports=['speedtest', 'network_adapter_information', 'matplotlib', 'tkinter',
+    'matplotlib.backends.backend_tkagg', 'matplotlib.figure'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -42,5 +43,5 @@ app = BUNDLE(
     name='Alexs_SpeedTest.app',
     icon='speedtest.icns',
     bundle_identifier='org.AlexTkDev.speedtest',
-    version='1.1.1',
+    version='2.0.0',
 )
