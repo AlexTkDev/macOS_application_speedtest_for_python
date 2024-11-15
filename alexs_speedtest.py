@@ -4,6 +4,21 @@ from tkinter import messagebox
 from tkinter import ttk
 import speedtest as st
 import network_adapter_information
+import os
+from test_history import save_test_results, view_history, plot_history
+
+
+# Get the history file path in the Documents folder
+def get_history_path():
+    """Returns the path to the history file in the Documents folder."""
+    home = os.path.expanduser("~")
+    documents_path = os.path.join(home, "Documents")
+    os.makedirs(documents_path, exist_ok=True)  # Creates the folder if it doesn't exist
+    return os.path.join(documents_path, "test_history.json")
+
+
+# Path to the history file
+history_path = get_history_path()
 
 
 def update_progress(value, message):
@@ -15,35 +30,43 @@ def update_progress(value, message):
 
 def perform_speedtest():
     """Performs the speed test and updates the UI with results."""
-    test = st.Speedtest()
-    result_container = {}
+    try:
+        test = st.Speedtest()
+        result_container = {}
 
-    # Download speed test
-    update_progress(0, "Starting download speed test...")
-    download_thread = threading.Thread(target=test_download_speed, args=(test, result_container))
-    download_thread.start()
-    download_thread.join()  # Wait for the download test to finish
+        # Download speed test
+        update_progress(0, "Starting download speed test...")
+        download_thread = threading.Thread(target=test_download_speed,
+                                           args=(test, result_container))
+        download_thread.start()
+        download_thread.join()  # Wait for the download test to finish
 
-    if 'error' in result_container:
-        messagebox.showerror("Error", result_container['error'])
-        return
+        if 'error' in result_container:
+            raise ValueError(result_container['error'])
 
-    download_speed = result_container['download']
+        download_speed = result_container['download']
 
-    # Upload speed test
-    update_progress(0, "Starting upload speed test...")
-    upload_thread = threading.Thread(target=test_upload_speed, args=(test, result_container))
-    upload_thread.start()
-    upload_thread.join()  # Wait for the upload test to finish
+        # Upload speed test
+        update_progress(0, "Starting upload speed test...")
+        upload_thread = threading.Thread(target=test_upload_speed, args=(test, result_container))
+        upload_thread.start()
+        upload_thread.join()  # Wait for the upload test to finish
 
-    if 'error' in result_container:
-        messagebox.showerror("Error", result_container['error'])
-        return
+        if 'error' in result_container:
+            raise ValueError(result_container['error'])
 
-    upload_speed = result_container['upload']
-    ping = test.results.ping
+        upload_speed = result_container['upload']
+        ping = test.results.ping
 
-    display_results(download_speed, upload_speed, ping)
+        display_results(download_speed, upload_speed, ping)
+
+    except st.ConfigRetrievalError as e:
+        # Catch speedtest specific errors and show in UI
+        messagebox.showerror("Speedtest Error",
+                             f"Error retrieving configuration: {e}")
+    except Exception as e:
+        # Catch any other exceptions and show in UI
+        messagebox.showerror("Error", f"An error occurred: {e}")
 
 
 def test_download_speed(test, result_container):
@@ -92,8 +115,18 @@ def display_results(down_speed, up_speed, ping):
     result_label.config(text=result_text)
     update_progress(100, "Test complete!")  # Set progress to 100%
 
+    # Hide the progress bar after the test is complete
+    progress_label.pack_forget()
+    progress_bar.pack_forget()
+
+    # Save results to history
+    save_test_results(down_speed, up_speed, ping, history_path)
+
     # Show "Repeat Speed Test" button and hide the exit button
     repeat_button.pack(pady=10)
+
+    # Show history buttons after the test is complete
+    history_frame.pack(pady=10)
 
 
 def start_speedtest():
@@ -101,6 +134,9 @@ def start_speedtest():
     result_label.config(text="Running speed test...")
     start_button.pack_forget()  # Hide the start button
     repeat_button.pack_forget()  # Hide the repeat button if it was visible
+
+    # Hide history buttons when repeating the test
+    history_frame.pack_forget()
 
     # Show progress bar
     progress_label.pack(pady=10)
@@ -128,6 +164,18 @@ def display_system_info():
     system_info_label.config(text=info_text)
 
 
+def repeat_speedtest():
+    """Repeats the speed test."""
+    result_label.config(text="Running speed test again...")
+    history_frame.pack_forget()  # Hide history buttons before repeating the test
+
+    # Hide the progress bar before repeating the test
+    progress_label.pack_forget()
+    progress_bar.pack_forget()
+
+    start_speedtest()  # Restart the test
+
+
 def exit_program():
     """Closes the program."""
     root.quit()
@@ -138,6 +186,10 @@ root = tk.Tk()
 root.title("Internet Speed Test")
 root.geometry("400x450")
 
+# Label to display system information
+system_info_label = tk.Label(root, text="", justify="left", anchor="w")
+system_info_label.pack(pady=10, padx=20)
+
 # Button to start speed test
 start_button = tk.Button(root, text="Start Speed Test", command=start_speedtest)
 start_button.pack(pady=20)
@@ -145,6 +197,7 @@ start_button.pack(pady=20)
 # Button to repeat speed test
 repeat_button = tk.Button(root, text="Repeat Speed Test", command=start_speedtest)
 repeat_button.pack_forget()  # Initially hidden
+repeat_button.config(command=repeat_speedtest)  # Connect the new function to the button
 
 # Label to display results
 result_label = tk.Label(root, text="")
@@ -158,9 +211,20 @@ progress_label = tk.Label(root, text="")
 progress_bar = ttk.Progressbar(root, length=300, mode='determinate')
 # Initially, progress is not visible
 
-# Label to display system information
-system_info_label = tk.Label(root, text="", justify="left", anchor="w")
-system_info_label.pack(pady=10, padx=20)
+# Create frame for history buttons
+history_frame = tk.Frame(root)
+
+# Button to view history
+history_button = tk.Button(history_frame, text="View Test History table",
+                           command=lambda: view_history(root, history_path))
+history_button.pack(side="left", padx=10)
+
+plot_button = tk.Button(history_frame, text="Show graph Test History",
+                        command=lambda: plot_history(root, history_path))
+plot_button.pack(side="left", padx=10)
+
+# Hide the history frame until the test is complete
+history_frame.pack_forget()
 
 # Exit button
 exit_button = tk.Button(root, text="Exit", command=exit_program)
