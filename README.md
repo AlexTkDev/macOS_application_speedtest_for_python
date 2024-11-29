@@ -88,7 +88,7 @@ Or, to analyze all Python files in the project, run:
 ```
 This setup is also configured to run automatically within GitHub Actions on every code push, 
 checking the code with multiple Python versions for compatibility.
-
+ 
 ### Contribution
 If you would like to contribute to the project, please create a fork of the repository and submit a Pull Request with your changes.
 
