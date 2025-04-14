@@ -1,4 +1,3 @@
-# speedtest_app/__init__.py
 """
 macOS_application_speedtest_for_python package.
 

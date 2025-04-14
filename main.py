@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Entry point for macOS_application_speedtest application.
 """
