@@ -7,8 +7,8 @@ from speedtest_app import network_adapter_information
 class TestNetworkAdapter(unittest.TestCase):
     """Tests for the network_adapter_information module."""
 
-    @patch('network_adapter_information.platform')
-    @patch('network_adapter_information.psutil')
+    @patch('speedtest_app.network_adapter_information.platform')
+    @patch('speedtest_app.network_adapter_information.psutil')
     def test_get_network_info_success(self, mock_psutil, mock_platform):
         """Test successful retrieval of network information."""
         # Setup mocks
@@ -25,12 +25,12 @@ class TestNetworkAdapter(unittest.TestCase):
 
         # Mock network interfaces
         mock_address_en0_ip = MagicMock(family=socket.AF_INET, address="192.168.1.10",
-                                        netmask="255.255.255.0")
+                                    netmask="255.255.255.0")
         mock_address_en0_mac = MagicMock(family=socket.AF_LINK, address="00:11:22:33:44:55")
         mock_address_en0_ipv6 = MagicMock(family=socket.AF_INET6, address="fe80::1")
 
         mock_address_lo0_ip = MagicMock(family=socket.AF_INET, address="127.0.0.1",
-                                        netmask="255.0.0.0")
+                                    netmask="255.0.0.0")
         mock_address_lo0_mac = MagicMock(family=socket.AF_LINK, address="00:00:00:00:00:00")
 
         mock_interfaces = {

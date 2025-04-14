@@ -5,8 +5,8 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 import speedtest as st
-import network_adapter_information
-from test_history import save_test_results, view_history, plot_history
+from speedtest_app import network_adapter_information
+from speedtest_app.test_history import save_test_results, view_history, plot_history
 
 
 # Настройка логирования
@@ -29,7 +29,6 @@ def setup_logging():
 
 # Инициализация логгера
 logger = setup_logging()
-
 
 # Get the history file path in the Documents folder
 def get_history_path():

@@ -4,7 +4,7 @@ import json
 import tempfile
 import shutil
 from unittest.mock import patch, MagicMock
-import test_history
+from speedtest_app import test_history
 
 
 class TestHistory(unittest.TestCase):
@@ -22,7 +22,9 @@ class TestHistory(unittest.TestCase):
     def test_save_test_results_new_file(self):
         """Test saving test results to a new file."""
         # Call function with test data
-        test_history.save_test_results(100.5, 50.2, 20.1, self.history_path)
+        test_history.save_test_results(
+            100.5, 50.2, 20.1, self.history_path
+        )
 
         # Verify file was created and contains correct data
         self.assertTrue(os.path.exists(self.history_path))
@@ -48,7 +50,9 @@ class TestHistory(unittest.TestCase):
             json.dump(initial_data, f)
 
         # Call function with new test data
-        test_history.save_test_results(100.5, 50.2, 20.1, self.history_path)
+        test_history.save_test_results(
+            100.5, 50.2, 20.1, self.history_path
+        )
 
         # Verify file contains both entries
         with open(self.history_path, 'r', encoding='utf-8') as f:
@@ -65,7 +69,9 @@ class TestHistory(unittest.TestCase):
             f.write("This is not valid JSON")
 
         # Call function (should handle the error and create a new file)
-        test_history.save_test_results(100.5, 50.2, 20.1, self.history_path)
+        test_history.save_test_results(
+            100.5, 50.2, 20.1, self.history_path
+        )
 
         # Verify file contains valid data now
         with open(self.history_path, 'r', encoding='utf-8') as f:
