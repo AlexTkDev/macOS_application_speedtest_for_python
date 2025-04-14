@@ -84,22 +84,19 @@ def get_network_info():
 
 
 def get_active_adapter_info():
-    """
-    Returns information only about the currently active network adapter.
-
-    Returns:
-        dict: Information about the active adapter or None if not found
-    """
+    """Возвращает информацию о текущем активном сетевом адаптере."""
     try:
         all_info = get_network_info()
-        active_adapters = [adapter for adapter in all_info["Adapters"] if
-                           adapter.get("Active", False)]
+        active_adapters = [adapter for adapter in all_info["Adapters"]
+                         if adapter["Active"] and adapter["IP Address"]]
 
-        # Sort by bytes received (highest first) to find the most active adapter
-        if active_adapters:
-            active_adapters.sort(key=lambda x: x.get("Bytes Received", 0), reverse=True)
-            return active_adapters[0]
-        return None
+        if not active_adapters:
+            logger.warning("No active network adapters found")
+            return None
+
+        # Сортировка по объему принятых данных
+        active_adapters.sort(key=lambda x: x["Bytes Received"], reverse=True)
+        return active_adapters[0]
 
     except Exception as e:
         logger.error(f"Error getting active adapter info: {e}", exc_info=True)
