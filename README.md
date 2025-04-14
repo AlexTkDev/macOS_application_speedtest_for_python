@@ -1,3 +1,4 @@
+### On development stage. 
 ## Documentation for macOS_application_speedtest_for_python
 
 ### Project Description
