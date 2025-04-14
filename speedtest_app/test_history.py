@@ -6,15 +6,20 @@ from tkinter import Toplevel, Text, Scrollbar, messagebox, ttk, Frame, Button
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
-# Получаем логгер
 logger = logging.getLogger("SpeedTest")
 
-# Path to the file for storing history
-HISTORY_FILE = "test_history.json"
+
+def get_history_file_path():
+    """Returns the path to the history file in Downloads directory."""
+    downloads_dir = os.path.join(os.path.expanduser("~"), "Downloads")
+    return os.path.join(downloads_dir, "speedtest_history.json")
 
 
-def save_test_results(download_speed, upload_speed, ping, file_path="test_history.json"):
-    """Saves the test results to a specified JSON file with timestamp."""
+def save_test_results(download_speed, upload_speed, ping, file_path=None):
+    """Saves the test results to the Downloads directory."""
+    if file_path is None:
+        file_path = get_history_file_path()
+
     data = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "download_speed": download_speed,
@@ -22,25 +27,33 @@ def save_test_results(download_speed, upload_speed, ping, file_path="test_histor
         "ping": ping
     }
 
-    # If the file exists, load the current data
-    if os.path.exists(file_path):
-        try:
-            with open(file_path, "r", encoding="utf-8") as file:
-                history = json.load(file)
-        except json.JSONDecodeError:
-            logger.error(f"Error decoding JSON from {file_path}. Creating new history.")
-            history = []
-    else:
-        history = []
-
-    # Add new data
-    history.append(data)
-
-    # Save the updated file
     try:
+        # Ensure directory exists (although Downloads should always exist)
+        downloads_dir = os.path.dirname(file_path)
+        if not os.path.exists(downloads_dir):
+            logger.warning(f"Downloads directory not found at {downloads_dir}")
+            messagebox.showerror("Error", "Downloads directory not found")
+            return
+
+        # Load existing history or create new
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, "r", encoding="utf-8") as file:
+                    history = json.load(file)
+            except json.JSONDecodeError:
+                logger.error(f"Error decoding JSON from {file_path}. Creating new history.")
+                history = []
+        else:
+            history = []
+
+        # Add new data
+        history.append(data)
+
+        # Save the updated file
         with open(file_path, "w", encoding="utf-8") as file:
             json.dump(history, file, indent=4)
         logger.info(f"Test results saved to {file_path}")
+
     except Exception as e:
         logger.error(f"Error saving test results: {e}", exc_info=True)
         messagebox.showerror("Error", f"Could not save test results: {e}")

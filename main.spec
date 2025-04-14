@@ -4,6 +4,7 @@ a = Analysis(
     ['speedtest_app/alexs_speedtest.py'],
     pathex=[],
     binaries=[],
+    datas=[('test_history.json', '.')],
     hiddenimports=[
         'speedtest_cli',
         'speedtest_app.network_adapter_information',

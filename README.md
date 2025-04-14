@@ -94,7 +94,8 @@ macOS_application_speedtest_for_python/
 ├── .github/workflows/         # GitHub Actions configuration
 │   └── pylint.yml
 ├── LICENSE                    # MIT License
-└── README.md                  # This documentation
+├──  README.md                 # This documentation
+└── test_history.py            # Test history file 
 ```
 
 #### How It Works
