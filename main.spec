@@ -1,13 +1,17 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 a = Analysis(
-    ['alexs_speedtest.py'],
+    ['speedtest_app/alexs_speedtest.py'],
     pathex=[],
     binaries=[],
-    datas=[('test_history.json', '.')],
-    hiddenimports=['speedtest', 'network_adapter_information', 'matplotlib', 'tkinter',
-    'matplotlib.backends.backend_tkagg', 'matplotlib.figure'],
+    hiddenimports=[
+        'speedtest_cli',
+        'speedtest_app.network_adapter_information',
+        'matplotlib',
+        'tkinter',
+        'matplotlib.backends.backend_tkagg',
+        'matplotlib.figure'
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -23,7 +27,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='alexs_peedtest',
+    name='alexs_speedtest',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -40,8 +44,8 @@ exe = EXE(
 )
 app = BUNDLE(
     exe,
-    name='Alexs_SpeedTest.app',
+    name='Alex_SpeedTest.app',
     icon='speedtest.icns',
     bundle_identifier='org.AlexTkDev.speedtest',
-    version='2.0.0',
+    version='3.0.0',
 )

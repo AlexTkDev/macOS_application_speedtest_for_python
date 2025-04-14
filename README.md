@@ -8,7 +8,7 @@ and also supports retesting and viewing test history.
 This project is built based on another one of my applications, which you can check out on GitHub:
 [Internet Speed Test](https://github.com/AlexTkDev/different_mini-apps/tree/main/check_internrt_speed)
 
-### What's New in Version 2.0.1
+### What's New in Version 3.0.0
 - Added comprehensive logging system for better debugging
 - Improved error handling throughout the application
 - Enhanced visualization of test history with interactive graphs
