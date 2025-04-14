@@ -12,7 +12,7 @@ logger = logging.getLogger("SpeedTest")
 
 def get_app_version():
     """Returns the current version of the application."""
-    return "2.0.1"
+    return "3.0.0"
 
 
 def format_speed(speed_mbps):
@@ -65,6 +65,7 @@ def load_settings():
     }
 
     if not os.path.exists(settings_file):
+        save_settings(default_settings)
         return default_settings
 
     try:
@@ -74,6 +75,7 @@ def load_settings():
             for key, value in default_settings.items():
                 if key not in settings:
                     settings[key] = value
+            settings["last_used"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         logger.info(f"Settings loaded from {settings_file}")
         return settings
     except Exception as e:

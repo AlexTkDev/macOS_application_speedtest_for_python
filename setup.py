@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="macOS_speedtest",
-    version="2.0.1",
+    version="3.0.0",
     author="Aleksandr",
     author_email="yourmail@example.com",
     description="A macOS application to test internet connection speed",
@@ -30,7 +30,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "alex-speedtest=alex_speedtest:main",
+            "alex-speedtest=speedtest_app.alexs_speedtest:main",
         ],
     },
     include_package_data=True,
