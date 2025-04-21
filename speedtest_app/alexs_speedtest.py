@@ -6,20 +6,28 @@ from tkinter import ttk, messagebox
 import speedtest as st
 from datetime import datetime
 from speedtest_app import network_adapter_information
-from speedtest_app.test_history import save_test_results, view_history, plot_history
-from speedtest_app.gui import ResultsFrame, SettingsWindow, create_menu, show_about_dialog
+from speedtest_app.test_history import save_test_results
+from speedtest_app.gui import (
+    ResultsFrame,
+    SettingsWindow,
+    create_menu,
+    show_about_dialog
+)
 from speedtest_app.utils import (
     get_app_version,
     format_speed,
     load_settings,
-    save_settings,
-    ensure_user_data_dir
+    save_settings
 )
 
 
 def setup_logging():
     """Настраивает систему логирования."""
-    log_dir = os.path.join(os.path.expanduser("~"), "Documents", "SpeedTest_Logs")
+    log_dir = os.path.join(
+        os.path.expanduser("~"),
+        "Documents",
+        "SpeedTest_Logs"
+    )
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, "speedtest_log.log")
 
@@ -73,21 +81,39 @@ class SpeedTestApp:
             mode='determinate'
         )
 
+        # Основная рамка для кнопок
         self.button_frame = tk.Frame(self.root)
         self.button_frame.pack(pady=20)
 
+        # Кнопка запуска теста
         self.start_button = ttk.Button(
             self.button_frame,
             text="Start Speed Test",
             command=self.start_speedtest
         )
-        self.start_button.pack()
+        self.start_button.pack(pady=(0, 5))
 
+        # Кнопка повтора теста (изначально скрыта)
         self.repeat_button = ttk.Button(
             self.button_frame,
             text="Repeat Speed Test",
             command=self.repeat_speedtest
         )
+
+        # Кнопки истории и графика (отображаются сразу)
+        self.history_button = ttk.Button(
+            self.button_frame,
+            text="Посмотреть историю",
+            command=self.show_history
+        )
+        self.history_button.pack(pady=5)
+
+        self.plot_button = ttk.Button(
+            self.button_frame,
+            text="Посмотреть график",
+            command=self.show_plot
+        )
+        self.plot_button.pack(pady=5)
 
     def update_network_info(self):
         """Обновляет информацию о сетевом адаптере."""
@@ -130,6 +156,7 @@ class SpeedTestApp:
         self.progress_bar["value"] = 0
 
         self.start_button.config(state="disabled")
+        self.repeat_button.pack_forget()
 
         self.test_thread = threading.Thread(target=self._run_speedtest)
         self.test_thread.start()
@@ -180,10 +207,12 @@ class SpeedTestApp:
             timestamp
         )
 
+        # Показываем кнопку повтора после завершения теста
         self.repeat_button.pack(pady=(5, 0))
 
         if self.settings.get("auto_save_results", True):
             save_test_results(download, upload, ping)
+            logger.info("Test results saved to Downloads directory")
 
     def _show_error(self, error_message):
         """Показывает сообщение об ошибке."""
@@ -193,6 +222,18 @@ class SpeedTestApp:
         """Очищает интерфейс после теста."""
         self.progress_frame.pack_forget()
         self.start_button.config(state="normal")
+
+    def show_history(self):
+        """Открывает окно истории тестов."""
+        from speedtest_app.test_history import get_history_file_path, view_history
+        history_path = get_history_file_path()
+        view_history(self.root, history_path)
+
+    def show_plot(self):
+        """Открывает окно графика истории тестов."""
+        from speedtest_app.test_history import get_history_file_path, plot_history
+        history_path = get_history_file_path()
+        plot_history(self.root, history_path)
 
 
 def main():
