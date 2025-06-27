@@ -80,7 +80,7 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(len(data), 1)
         self.assertEqual(data[0]["download_speed"], 100.5)
 
-    @patch('test_history.messagebox')
+    @patch('speedtest_app.test_history.messagebox')
     def test_view_history_no_file(self, mock_messagebox):
         """Test view_history when no history file exists."""
         root_mock = MagicMock()
@@ -91,7 +91,7 @@ class TestHistory(unittest.TestCase):
         # Verify messagebox was shown
         mock_messagebox.showinfo.assert_called_once_with("History", "No history available.")
 
-    @patch('test_history.messagebox')
+    @patch('speedtest_app.test_history.messagebox')
     def test_plot_history_no_file(self, mock_messagebox):
         """Test plot_history when no history file exists."""
         root_mock = MagicMock()

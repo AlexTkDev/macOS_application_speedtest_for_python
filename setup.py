@@ -27,6 +27,7 @@ setup(
         "matplotlib>=3.5.0",
         "psutil>=5.9.0",
         "pyinstaller>=5.6.0",
+        'ttkbootstrap>=1.10.1',
     ],
     entry_points={
         "console_scripts": [

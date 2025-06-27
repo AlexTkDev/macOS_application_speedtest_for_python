@@ -48,5 +48,5 @@ app = BUNDLE(
     name='Alex_SpeedTest.app',
     icon='speedtest.icns',
     bundle_identifier='org.AlexTkDev.speedtest',
-    version='3.0.0',
+    version='4.0.0',
 )

@@ -3,6 +3,7 @@ import platform
 import logging
 import psutil
 from datetime import datetime
+import concurrent.futures
 
 # Получаем логгер
 logger = logging.getLogger("SpeedTest")
@@ -84,7 +85,9 @@ def get_network_info():
 
 
 def get_active_adapter_info():
-    """Возвращает информацию о текущем активном сетевом адаптере."""
+    """
+    Returns information about the currently active network adapter.
+    """
     try:
         all_info = get_network_info()
         active_adapters = [adapter for adapter in all_info["Adapters"]
@@ -101,3 +104,12 @@ def get_active_adapter_info():
     except Exception as e:
         logger.error(f"Error getting active adapter info: {e}", exc_info=True)
         return None
+
+
+class NetworkInfoService:
+    def __init__(self):
+        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    def get_active_adapter_async(self):
+        return self.executor.submit(get_active_adapter_info)
+    def get_network_info_async(self):
+        return self.executor.submit(get_network_info)
